@@ -41,7 +41,17 @@ void addBook(Book*& books, int& bookCount) {
     cout << "Book added successfully!" << endl;
 }
 
-
+void displayBooks(Book* books, int bookCount) {
+    if (bookCount == 0) {// перевірка на наявність книг ввцілому 
+        cout << "No books available." << endl;
+        return;
+    }
+    for (int i = 0; i < bookCount; i++) { // вивод книга на єкран 
+        cout << "ID: " << books[i].id << ", Title: " << books[i].title
+        << ", Author: " << books[i].author << ", Year: " << books[i].year
+        << ", Genre: " << books[i].genre << endl;
+    }
+}
 
 int main(){
     Book* books = 0;// динамічний масив для зберігання книг та його розмір
