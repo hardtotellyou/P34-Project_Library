@@ -40,7 +40,7 @@ void addBook(Book*& books, int& bookCount) {
     bookCount++;
     cout << "Book added successfully!" << endl;
 }
-
+//функція для відображення книг 
 void displayBooks(Book* books, int bookCount) {
     if (bookCount == 0) {// перевірка на наявність книг ввцілому 
         cout << "No books available." << endl;
@@ -51,6 +51,18 @@ void displayBooks(Book* books, int bookCount) {
         << ", Author: " << books[i].author << ", Year: " << books[i].year
         << ", Genre: " << books[i].genre << endl;
     }
+}
+//функція для пошуку книг за айді
+void searchBookById(Book* books, int bookCount, int id) {
+    for (int i = 0; i < bookCount; i++) {
+        if (books[i].id == id) {// перевірка якщо айді співпадає вивести книгу за цим айді
+            cout << "ID: " << books[i].id << ", Title: " << books[i].title
+                << ", Author: " << books[i].author << ", Year: " << books[i].year
+                << ", Genre: " << books[i].genre << endl;
+            return;
+        }
+    }
+    cout << "Book not found." << endl;
 }
 
 int main(){
