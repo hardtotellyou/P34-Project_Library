@@ -2,7 +2,7 @@
 #include <string>
 #include <fstream>
 using namespace std;
-struct Book {
+struct Book { //структура до книг
     int id;
     string title;
     string author;
