@@ -2,7 +2,12 @@
 #include <string>
 #include <fstream>
 using namespace std;
-int main()
-{
-    std::cout << "Hello World!\n";
+struct Book {
+    int id;
+    string title;
+    string author;
+    int year;
+    string genre;
+};
+int main(){
 }
