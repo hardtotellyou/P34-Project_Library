@@ -39,6 +39,9 @@ void addBook(Book*& books, int& bookCount) {
     books = temp;
     bookCount++;
     cout << "Book added successfully!" << endl;
+}
+
+
 
 int main(){
     Book* books = 0;// динамічний масив для зберігання книг та його розмір
