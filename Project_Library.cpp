@@ -137,6 +137,44 @@ void saveToFile(Book* books, int bookCount) {
     }
     cout << "Data saved to files." << endl;
 }
+// функція для загрузки попередніх даних
+void loadFromFile(Book*& books, int& bookCount) {
+    string genreList[] = { "Fiction", "Non-Fiction", "Science", "Fantasy" };
+    for (const string& genre : genreList) {
+        ifstream inFile(genre + ".txt");
+        if (inFile.is_open()) {
+            while (!inFile.eof()) {
+                Book newBook;
+                inFile >> newBook.id;
+                inFile >> newBook.title;
+                inFile >> newBook.author;
+                inFile >> newBook.year;
+                inFile >> newBook.genre;
+
+                // перевінрка на наявність книги з таким ID
+                int i;
+                for (i = 0; i < bookCount; i++) {
+                    if (books[i].id == newBook.id) {
+                        break;
+                    }
+                }
+
+                // додаємо книгу, якщо ее ID уникальний 
+                if (!inFile.fail() && i == bookCount) {
+                    Book* temp = new Book[bookCount + 1];
+                    for (int j = 0; j < bookCount; j++) {
+                        temp[j] = books[j];
+                    }
+                    temp[bookCount] = newBook;
+                    delete[] books;
+                    books = temp;
+                    bookCount++;
+                }
+            }
+            inFile.close();
+        }
+    }
+}
 
 // головна функція
 int main() {
