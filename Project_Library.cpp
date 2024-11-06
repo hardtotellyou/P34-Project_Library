@@ -102,48 +102,49 @@ void deleteBookById(Book*& books, int& bookCount, int id) {
     cout << "Book deleted successfully!" << endl;
 }
 
-// Функція для редактування книг
+// Функція для редагування книг
 void editBook(Book* books, int bookCount, int id) {
     for (int i = 0; i < bookCount; i++) {
-        if (books[i].id == id) {
+        if (books[i].id == id) { // пошук книги за ID
             cout << "Enter new title: ";
-            cin << books[i].title;
+            cin >> books[i].title; // оновлюємо назву книги
             cout << "Enter new author: ";
-            cin << books[i].author;
+            cin >> books[i].author; // оновлюємо автора книги
             cout << "Enter new publication year: ";
-            cin >> books[i].year;
+            cin >> books[i].year; // оновлюємо рік публікації
             cout << "Enter new genre: ";
-            cin << books[i].genre;
+            cin >> books[i].genre; // оновлюємо жанр
             cout << "Book updated successfully!" << endl;
             return;
         }
     }
-    cout << "Book not found." << endl;
+    cout << "Book not found." << endl; // якщо книга з таким ID не знайдена
 }
 
-// Функція для збереження книг в файли по жанрам
+// Функція для збереження книг у файли за жанрами
 void saveToFile(Book* books, int bookCount) {
     for (int i = 0; i < bookCount; i++) {
-        string filename = books[i].genre + ".txt";
-        ofstream outFile(filename, ios::app);
-        if (outFile.is_open()) {
+        string filename = books[i].genre + ".txt"; // ім'я файлу — назва жанру
+        ofstream outFile(filename, ios::app); // відкриваємо файл для запису
+        if (outFile.is_open()) { // перевіряємо, чи файл відкрився
             outFile << books[i].id << endl
                 << books[i].title << endl
                 << books[i].author << endl
                 << books[i].year << endl
-                << books[i].genre << endl;
-            outFile.close();
+                << books[i].genre << endl; // записуємо дані книги у файл
+            outFile.close(); // закриваємо файл
         }
     }
-    cout << "Data saved to files." << endl;
+    cout << "Data saved to files." << endl; // повідомлення про успішне збереження
 }
-// функція для загрузки попередніх даних
+
+// функція для завантаження попередніх даних із файлів
 void loadFromFile(Book*& books, int& bookCount) {
-    string genreList[] = { "Fiction", "Non-Fiction", "Science", "Fantasy" };
-    for (const string& genre : genreList) {
-        ifstream inFile(genre + ".txt");
-        if (inFile.is_open()) {
-            while (!inFile.eof()) {
+    string genreList[] = { "Fiction", "Non-Fiction", "Science", "Fantasy" }; // список жанрів
+    for (const string& genre : genreList) { // для кожного жанру
+        ifstream inFile(genre + ".txt"); // відкриваємо відповідний файл
+        if (inFile.is_open()) { // перевіряємо, чи файл відкрився
+            while (!inFile.eof()) { // поки не кінець файлу
                 Book newBook;
                 inFile >> newBook.id;
                 inFile >> newBook.title;
@@ -151,27 +152,27 @@ void loadFromFile(Book*& books, int& bookCount) {
                 inFile >> newBook.year;
                 inFile >> newBook.genre;
 
-                // перевінрка на наявність книги з таким ID
+                // перевірка на наявність книги з таким ID
                 int i;
                 for (i = 0; i < bookCount; i++) {
-                    if (books[i].id == newBook.id) {
+                    if (books[i].id == newBook.id) { // якщо ID збігається, пропускаємо
                         break;
                     }
                 }
 
-                // додаємо книгу, якщо ее ID уникальний 
-                if (!inFile.fail() && i == bookCount) {
+                // додаємо книгу, якщо її ID унікальний
+                if (!inFile.fail() && i == bookCount) { // якщо не було помилок при зчитуванні
                     Book* temp = new Book[bookCount + 1];
                     for (int j = 0; j < bookCount; j++) {
-                        temp[j] = books[j];
+                        temp[j] = books[j]; // копіюємо наявні книги
                     }
-                    temp[bookCount] = newBook;
-                    delete[] books;
-                    books = temp;
-                    bookCount++;
+                    temp[bookCount] = newBook; // додаємо нову книгу
+                    delete[] books; // видаляємо старий масив
+                    books = temp; // оновлюємо вказівник на новий масив
+                    bookCount++; // збільшуємо лічильник книг
                 }
             }
-            inFile.close();
+            inFile.close(); // закриваємо файл
         }
     }
 }
