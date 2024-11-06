@@ -102,7 +102,7 @@ void deleteBookById(Book*& books, int& bookCount, int id) {
     cout << "Book deleted successfully!" << endl;
 }
 
-// Функция для редактирования книги
+// Функція для редактування книг
 void editBook(Book* books, int bookCount, int id) {
     for (int i = 0; i < bookCount; i++) {
         if (books[i].id == id) {
@@ -121,7 +121,7 @@ void editBook(Book* books, int bookCount, int id) {
     cout << "Book not found." << endl;
 }
 
-// Функция для сохранения книг в файлы по жанрам
+// Функція для збереження книг в файли по жанрам
 void saveToFile(Book* books, int bookCount) {
     for (int i = 0; i < bookCount; i++) {
         string filename = books[i].genre + ".txt";
