@@ -194,4 +194,35 @@ int main() {
         cout << "0. Exit\n";
         cout << "Enter choice: ";
         cin >> choice;
+        if (choice == 1) {
+            addBook(books, bookCount);
+        }
+        else if (choice == 2) {
+            displayBooks(books, bookCount);
+        }
+        else if (choice == 3) {
+            cout << "Enter book ID to search: ";
+            cin >> id;
+            searchBookById(books, bookCount, id);
+        }
+        else if (choice == 4) {
+            cout << "Enter book ID to delete: ";
+            cin >> id;
+            deleteBookById(books, bookCount, id);
+        }
+        else if (choice == 5) {
+            cout << "Enter book ID to edit: ";
+            cin >> id;
+            editBook(books, bookCount, id);
+        }
+        else if (choice == 6) {
+            saveToFile(books, bookCount);
+        }
+        else if (choice == 0) {
+            cout << "Exiting program." << endl;
+        }
+        else {
+            cout << "Invalid choice. Try again." << endl;
+        }
+    }
 }
