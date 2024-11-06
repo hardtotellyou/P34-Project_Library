@@ -65,6 +65,33 @@ void searchBookById(Book* books, int bookCount, int id) {
     cout << "Book not found." << endl;
 }
 
+// функція для видалення книги за айді
+void deleteBookById(Book*& books, int& bookCount, int id) {
+    int index = 0;
+    for (int i = 0; i < bookCount; i++) {
+        if (books[i].id == id) {
+            index = i;
+            break;
+        }
+    }
+    if (index == 0) {
+        cout << "Book not found." << endl;
+        return;
+    }
+
+    Book* temp = new Book[bookCount - 1];
+    for (int i = 0, j = 0; i < bookCount; i++) {
+        if (i != index) {
+            temp[j++] = books[i];
+        }
+    }
+    delete[] books;
+    books = temp;
+    bookCount--;
+    cout << "Book deleted successfully!" << endl;
+}
+
+
 int main(){
     Book* books = 0;// динамічний масив для зберігання книг та його розмір
     int bookCount = 0;
