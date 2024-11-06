@@ -102,6 +102,25 @@ void deleteBookById(Book*& books, int& bookCount, int id) {
     cout << "Book deleted successfully!" << endl;
 }
 
+// Функция для редактирования книги
+void editBook(Book* books, int bookCount, int id) {
+    for (int i = 0; i < bookCount; i++) {
+        if (books[i].id == id) {
+            cout << "Enter new title: ";
+            cin << books[i].title;
+            cout << "Enter new author: ";
+            cin << books[i].author;
+            cout << "Enter new publication year: ";
+            cin >> books[i].year;
+            cout << "Enter new genre: ";
+            cin << books[i].genre;
+            cout << "Book updated successfully!" << endl;
+            return;
+        }
+    }
+    cout << "Book not found." << endl;
+}
+
 // головна функція
 int main() {
     Book* books = 0; // ініціалізуємо динамічний масив для зберігання книг
