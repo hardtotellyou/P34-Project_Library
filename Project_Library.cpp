@@ -181,7 +181,17 @@ void loadFromFile(Book*& books, int& bookCount) {
 int main() {
     Book* books = 0; // ініціалізуємо динамічний масив для зберігання книг
     int bookCount = 0; // лічильник кількості книг
-
-    // тут можна викликати функції для роботи з книгами
-    return 0; // завершення програми
+    loadFromFile(books, bookCount);
+    int choice = 0;
+    int id;
+    while (choice != 0) {
+        cout << "1. Add Book\n";
+        cout << "2. Display All Books\n";
+        cout << "3. Search Book by ID\n";
+        cout << "4. Delete Book by ID\n";
+        cout << "5. Edit Book\n";
+        cout << "6. Save Data to File\n";
+        cout << "0. Exit\n";
+        cout << "Enter choice: ";
+        cin >> choice;
 }
