@@ -121,6 +121,23 @@ void editBook(Book* books, int bookCount, int id) {
     cout << "Book not found." << endl;
 }
 
+// Функция для сохранения книг в файлы по жанрам
+void saveToFile(Book* books, int bookCount) {
+    for (int i = 0; i < bookCount; i++) {
+        string filename = books[i].genre + ".txt";
+        ofstream outFile(filename, ios::app);
+        if (outFile.is_open()) {
+            outFile << books[i].id << endl
+                << books[i].title << endl
+                << books[i].author << endl
+                << books[i].year << endl
+                << books[i].genre << endl;
+            outFile.close();
+        }
+    }
+    cout << "Data saved to files." << endl;
+}
+
 // головна функція
 int main() {
     Book* books = 0; // ініціалізуємо динамічний масив для зберігання книг
