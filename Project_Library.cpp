@@ -182,7 +182,7 @@ int main() {
     Book* books = 0; // ініціалізуємо динамічний масив для зберігання книг
     int bookCount = 0; // лічильник кількості книг
     loadFromFile(books, bookCount);
-    int choice = 0;
+    int choice;
     int id;
     while (choice != 0) {
         cout << "1. Add Book\n";
@@ -225,4 +225,7 @@ int main() {
             cout << "Invalid choice. Try again." << endl;
         }
     }
+    saveToFile(books, bookCount);  // збереження данних при виході з программи 
+    delete[] books;  // очистка памяті
+    return 0;
 }
