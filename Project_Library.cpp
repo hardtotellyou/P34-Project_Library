@@ -225,6 +225,7 @@ int main() {
         }
         else if (choice == 7) {
             cout << "Exiting program." << endl;
+            break;
         }
         else {
             cout << "Invalid choice. Try again." << endl;
