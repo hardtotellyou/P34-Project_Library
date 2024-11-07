@@ -1,15 +1,15 @@
-﻿#include <iostream>
+﻿#include <fstream>
+#include <iostream>
 #include <string>
-#include <fstream>
 using namespace std;
 
 // структура для зберігання інформації про книгу
 struct Book {
-    int id; // унікальний ідентифікатор книги
-    string title; // назва книги
+    int id;        // унікальний ідентифікатор книги
+    string title;  // назва книги
     string author; // автор книги
-    int year; // рік публікації книги
-    string genre; // жанр книги
+    int year;      // рік публікації книги
+    string genre;  // жанр книги
 };
 
 // функція для додавання книги до колекції
@@ -22,7 +22,7 @@ void addBook(Book*& books, int& bookCount) {
     for (int i = 0; i < bookCount; i++) {
         if (books[i].id == newBook.id) { // якщо ідентифікатори збігаються
             cout << "Error: Book with this ID already exists.\n";
-            return;  // завершуємо функцію, якщо книга з таким ID вже є
+            return; // завершуємо функцію, якщо книга з таким ID вже є
         }
     }
 
@@ -55,7 +55,8 @@ void displayBooks(Book* books, int bookCount) {
         cout << "No books available." << endl;
         return;
     }
-    for (int i = 0; i < bookCount; i++) { // цикл для виведення інформації про кожну книгу
+    for (int i = 0; i < bookCount;
+        i++) { // цикл для виведення інформації про кожну книгу
         cout << "ID: " << books[i].id << ", Title: " << books[i].title
             << ", Author: " << books[i].author << ", Year: " << books[i].year
             << ", Genre: " << books[i].genre << endl;
@@ -65,14 +66,16 @@ void displayBooks(Book* books, int bookCount) {
 // функція для пошуку книги за ідентифікатором
 void searchBookById(Book* books, int bookCount, int id) {
     for (int i = 0; i < bookCount; i++) {
-        if (books[i].id == id) { // якщо знайдено книгу з заданим ID, виводимо її дані
+        if (books[i].id ==
+            id) { // якщо знайдено книгу з заданим ID, виводимо її дані
             cout << "ID: " << books[i].id << ", Title: " << books[i].title
                 << ", Author: " << books[i].author << ", Year: " << books[i].year
                 << ", Genre: " << books[i].genre << endl;
             return; // завершуємо функцію, якщо книга знайдена
         }
     }
-    cout << "Book not found." << endl; // якщо книгу не знайдено, виводимо повідомлення
+    cout << "Book not found."
+        << endl; // якщо книгу не знайдено, виводимо повідомлення
 }
 
 // функція для видалення книги за ідентифікатором
@@ -132,7 +135,7 @@ void saveToFile(Book* books, int bookCount) {
                 << books[i].author << endl
                 << books[i].year << endl
                 << books[i].genre << endl; // записуємо дані книги у файл
-            outFile.close(); // закриваємо файл
+            outFile.close();                   // закриваємо файл
         }
     }
     cout << "Data saved to files." << endl; // повідомлення про успішне збереження
@@ -140,7 +143,8 @@ void saveToFile(Book* books, int bookCount) {
 
 // функція для завантаження попередніх даних із файлів
 void loadFromFile(Book*& books, int& bookCount) {
-    string genreList[] = { "Fiction", "Non-Fiction", "Science", "Fantasy" }; // список жанрів
+    string genreList[] = { "Fiction", "Non-Fiction", "Science",
+                          "Fantasy" };       // список жанрів
     for (const string& genre : genreList) { // для кожного жанру
         ifstream inFile(genre + ".txt"); // відкриваємо відповідний файл
         if (inFile.is_open()) { // перевіряємо, чи файл відкрився
@@ -161,7 +165,8 @@ void loadFromFile(Book*& books, int& bookCount) {
                 }
 
                 // додаємо книгу, якщо її ID унікальний
-                if (!inFile.fail() && i == bookCount) { // якщо не було помилок при зчитуванні
+                if (!inFile.fail() &&
+                    i == bookCount) { // якщо не було помилок при зчитуванні
                     Book* temp = new Book[bookCount + 1];
                     for (int j = 0; j < bookCount; j++) {
                         temp[j] = books[j]; // копіюємо наявні книги
@@ -182,7 +187,7 @@ int main() {
     Book* books = 0; // ініціалізуємо динамічний масив для зберігання книг
     int bookCount = 0; // лічильник кількості книг
     loadFromFile(books, bookCount);
-    int choice;
+    int choice = -1;
     int id;
     while (choice != 0) {
         cout << "1. Add Book\n";
@@ -191,7 +196,7 @@ int main() {
         cout << "4. Delete Book by ID\n";
         cout << "5. Edit Book\n";
         cout << "6. Save Data to File\n";
-        cout << "0. Exit\n";
+        cout << "7. Exit\n";
         cout << "Enter choice: ";
         cin >> choice;
         if (choice == 1) {
@@ -218,14 +223,14 @@ int main() {
         else if (choice == 6) {
             saveToFile(books, bookCount);
         }
-        else if (choice == 0) {
+        else if (choice == 7) {
             cout << "Exiting program." << endl;
         }
         else {
             cout << "Invalid choice. Try again." << endl;
         }
     }
-    saveToFile(books, bookCount);  // збереження данних при виході з программи 
-    delete[] books;  // очистка памяті
+    saveToFile(books, bookCount); // збереження данних при виході з программи
+    delete[] books; // очистка памяті
     return 0;
 }
