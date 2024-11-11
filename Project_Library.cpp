@@ -55,8 +55,7 @@ void displayBooks(Book* books, int bookCount) {
         cout << "No books available." << endl;
         return;
     }
-    for (int i = 0; i < bookCount;
-        i++) { // цикл для виведення інформації про кожну книгу
+    for (int i = 0; i < bookCount;i++) { // цикл для виведення інформації про кожну книгу
         cout << "ID: " << books[i].id << ", Title: " << books[i].title
             << ", Author: " << books[i].author << ", Year: " << books[i].year
             << ", Genre: " << books[i].genre << endl;
@@ -66,8 +65,7 @@ void displayBooks(Book* books, int bookCount) {
 // функція для пошуку книги за ідентифікатором
 void searchBookById(Book* books, int bookCount, int id) {
     for (int i = 0; i < bookCount; i++) {
-        if (books[i].id ==
-            id) { // якщо знайдено книгу з заданим ID, виводимо її дані
+        if (books[i].id == id) { // якщо знайдено книгу з заданим ID, виводимо її дані
             cout << "ID: " << books[i].id << ", Title: " << books[i].title
                 << ", Author: " << books[i].author << ", Year: " << books[i].year
                 << ", Genre: " << books[i].genre << endl;
@@ -187,9 +185,9 @@ int main() {
     Book* books = 0; // ініціалізуємо динамічний масив для зберігання книг
     int bookCount = 0; // лічильник кількості книг
     loadFromFile(books, bookCount);
-    int choice = -1;
     int id;
-    while (choice != 0) {
+    while (true) {
+        int choice;
         cout << "1. Add Book\n";
         cout << "2. Display All Books\n";
         cout << "3. Search Book by ID\n";
